@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <title>{% block sayfa_baslik %}
+Rehber Otomasyonu Sayfası - Ana Sayfa
+{% endblock %}</title>
+</head>
+<body class="text-center">
+<div class="alert alert-success" role="alert">
+    {% block icerik_baslik %}
+Rehber Otomasyonu Hoş Geldiniz<br>
+    Aşağıdaki Menü Aracılığı ile Yapmak İstediğiniz İşlemi Seçebilirsiniz
+{% endblock %}
+
+</div>
+
+<div class="container">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Ana Sayfa <span class="sr-only">(current)</span></a>
+      </li>
+         <li class="nav-item ">
+          <a class="nav-link" href="/duyuru_listesi" >
+          Duyurular
+          </a>
+</li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="/firma_ekle" >
+          İş Yeri Başvuruları
+          </a>
+</li>
+
+                <li class="nav-item ">
+        <a class="nav-link" href="/yonetim">Yönetim</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+</div>
+<div class="container">
+{% block icerik %}
+
+
+    <table class="table table-sm table-primary">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Firma İd</th>
+      <th scope="col">Firma Adı</th>
+       <th scope="col">Firma Resmi</th>
+        <th scope="col">Firma Semti</th>
+        <th scope="col">Görüntülenme Sayısı</th>
+{#      <th scope="col">Firma Puanı</th>#}
+        <th scope="col">Firma Görüntüle</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for isyeri in isyerleri %}
+      <tr>
+      <th scope="row">{{ isyeri.isyeri_id }}</th>
+      <td>{{ isyeri.isyeri_adi }}</td>
+      <td><img src="/{{ isyeri.isyeri_foto_01 }}" width="50" height="50"></td>
+      <td>{{ isyeri.semt_id.semt_adi}}</td>
+      <td>{{ isyeri.isyeri_goruntulenme_sayisi }}</td>
+{#      <td>{% if isyeri.isyeri_puani == 0 %}#}
+{#          Puanlanmamış {% else %}{{ isyeri.isyeri_puani}}{% endif %}</td>#}
+          <td><a href="/firma_goruntuleme/{{ isyeri.isyeri_id }}">Firma Detayları</a></td>
+    </tr>
+  {% endfor %}
+
+     </tbody>
+</table>
+
+
+{% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ </body>
+</html>

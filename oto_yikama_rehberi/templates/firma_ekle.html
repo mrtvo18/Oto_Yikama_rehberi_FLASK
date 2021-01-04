@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+
+{% block sayfa_baslik %}
+    Yönetici Sayfası - Firma Başvuru Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+    Firma Ekleme Sayfasındasınız <br>
+    Aşağıdaki Formu Doldurarak Sisteme Yeni Firma Ekleyebilirsiniz
+{% endblock %}
+
+{% block icerik %}
+    <div class="container">
+        {% if mesaj %}
+            <div class="alert alert-success" role="alert">
+                Firma Ekleme İşleminiz {{ mesaj }} İle Sonuçlanmıştır<br>
+                Yukarıda Bulunan Menü Aracılığı ile Yapmak İstediğiniz İşlemi Seçebilirsiniz
+            </div>
+        {% else %}
+            <form action="firma_ekle" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label>Firma Adı</label>
+                      <input type="text" class="form-control" id="inputEmail4"  name="isyeri_adi">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Firma Adresi</label>
+                      <input type="text" class="form-control" id="inputPassword4"  name="isyeri_adresi">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Firma Telefon</label>
+                      <input type="text" class="form-control" id="inputPassword4"  name="isyeri_telefon">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                         <label for="inputState">Firma Semti</label>
+                              <select id="inputState" class="form-control" name="isyeri_semt_id">
+                                  {% for semt in semtler %}
+                                    <option value={{ semt.semt_id }}>{{ semt.semt_adi}}</option>
+                                  {% endfor %}
+                              </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label >Firma Websitesi</label>
+                      <input type="text" class="form-control" id="inputPassword4"  name="isyeri_websitesi">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label >Firma Açıklama</label>
+                      <input type="textarea" class="form-control" id="inputPassword4"  name="isyeri_aciklama">
+                    </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle</label>
+                                <input type="file"  class="form-control" name="dosya01" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -2</label>
+                                <input type="file"  class="form-control" name="dosya02" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -3</label>
+                                <input type="file"  class="form-control" name="dosya03" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -4</label>
+                                <input type="file"  class="form-control" name="dosya04" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -5</label>
+                                <input type="file"  class="form-control" name="dosya05" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                          <input type="hidden" name="isyeri_durum" value="2">
+                            <label for="inputState">Firma Ekle</label><br>
+                                <button type="submit" class="btn btn-primary" >Firma Ekle</button>
+                      </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

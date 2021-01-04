@@ -1,0 +1,61 @@
+{% extends "yonetici.html" %}
+
+{% block sayfa_baslik %}
+Yönetici Sayfası - Yorum Güncelleme ve Silme Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+  Yorum Güncelleme ve Silme Sayfasındasınız {{ yonetici.yonetici_adi_soyadi.upper() }}<br>
+    Aşağıda Sisteminize Kayıtlı Bulunan Yorumların Listesini Bulabilirsiniz
+{% endblock %}
+
+
+
+
+
+
+
+    {% block icerik %}
+            <div class="container">
+    <div class="alert alert-success" role="alert">
+    Kayıtlı Toplam Yorum Sayısı : {{ yorumlar.__len__() }} <br>
+    </div>
+           <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Yorum Yapan</th>
+      <th scope="col">e-Posta</th>
+      <th scope="col">İşyeri Bilgisi</th>
+        <th scope="col">Yorum Durumu</th>
+      <th scope="col">Yorum Güncelle</th>
+
+      <th scope="col">Yorum Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for yorum in yorumlar %}
+    <tr>
+      <th scope="row">{{ yorum.yorum_id}}</th>
+              <td>{{ yorum.yorum_yapan_adi }}</td>
+        <td>{{ yorum.yorum_yapan_eposta}}</td>
+      <th>{{ yorum.isyeri_id.isyeri_adi}}</th>
+        <th>{% if yorum.yorum_durum==0 %}
+        Yayında
+        {% elif yorum.yorum_durum==1 %}
+        Askıda
+        {% else %}
+        Pasif
+        {% endif %}</th>
+      <th><a href= "/yonetici_yorum_guncelle/{{yorum.yorum_id }}" >Yorum Güncelle</a></th>
+      <th><a href="/yonetici_yorum_sil/{{yorum.yorum_id }}" >Yorum Sil</a></th>
+
+    </tr>
+    {% endfor %}
+    </table>
+
+
+</div>
+    {% endblock %}
+
+

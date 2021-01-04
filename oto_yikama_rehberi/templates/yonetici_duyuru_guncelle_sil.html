@@ -1,0 +1,52 @@
+{% extends "yonetici.html" %}
+
+{% block sayfa_baslik %}
+Yönetici Sayfası - Firma Güncelleme ve Silme Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+  Firma Güncelleme ve Silme Sayfasındasınız {{ yonetici.yonetici_adi_soyadi.upper() }}<br>
+    Aşağıda Sisteminize Kayıtlı Bulunan Firmaların Listesini Bulabilirsiniz
+{% endblock %}
+
+
+
+
+
+
+
+    {% block icerik %}
+            <div class="container">
+    <div class="alert alert-success" role="alert">
+    Kayıtlı Toplam Duyuru Sayısı : {{ duyurular.__len__() }} <br>
+    </div>
+           <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Duyuru Başlığı</th>
+      <th scope="col">Duyuruyu Yapan</th>
+      <th scope="col">Duyuru Tarihi</th>
+      <th scope="col">Duyuru Güncelle</th>
+      <th scope="col">Duyuru Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for duyuru in duyurular %}
+    <tr>
+      <th scope="row">{{ duyuru.duyuru_id}}</th>
+              <td>{{ duyuru.duyuru_basligi }}</td>
+        <td>{{ duyuru.duyuru_yonetici.yonetici_adi_soyadi}}</td>
+      <th>{{ duyuru.duyuru_tarihi}}</th>
+      <th><a href= "/yonetici_duyuru_guncelle/{{duyuru.duyuru_id }}" >Duyuru Güncelle</a></th>
+      <th><a href="/yonetici_duyuru_sil/{{duyuru.duyuru_id }}" >Duyuru Sil</a></th>
+
+    </tr>
+    {% endfor %}
+    </table>
+
+
+</div>
+    {% endblock %}
+
+

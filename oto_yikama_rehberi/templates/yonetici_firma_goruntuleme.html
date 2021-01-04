@@ -1,0 +1,148 @@
+{% extends "yonetici.html" %}
+
+{% block sayfa_baslik %}
+Firma Detayları Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+Firma Detaylarını Listeleme Sayfasındasınız<br>
+    Aşağıda Seçili Firmanın Detaylarını Bulabilirsiniz
+{% endblock %}
+
+
+
+
+
+
+
+    {% block icerik %}
+        <div class="container">
+{% if mesaj %}
+            <div class="alert alert-success" role="alert">
+
+                Yukarıda Bulunan Menü Aracılığı ile Yapmak İstediğiniz İşlemi Seçebilirsiniz
+            </div>
+        {% else %}
+                <table class="table">
+  <thead class="thead-dark ">
+    <tr>
+      <th scope="col">Firma Alan Bilgisi</th>
+      <th scope="col">Firma Alan İçeriği</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <th scope="row">Firma İd</th>
+      <td>{{ isyeri.isyeri_id}}</td>
+    </tr>
+                    <tr>
+      <th scope="row">Firma Adı</th>
+      <td>{{ isyeri.isyeri_adi}}</td>
+    </tr>
+                    <tr>
+      <th scope="row">Firma Adresi</th>
+      <td>{{ isyeri.isyeri_adresi}}</td>
+    </tr>
+                    <tr>
+      <th scope="row">Firma Telefon</th>
+      <td>{{ isyeri.isyeri_telefon}}</td>
+    </tr>
+                                        <tr>
+      <th scope="row">Firma Websitesi</th>
+      <td><a href="{{ isyeri.isyeri_websitesi }}">{{ isyeri.isyeri_websitesi }}</a>
+      </td>
+    </tr>
+<tr>
+      <th scope="row">Firma Açıklaması</th>
+      <td>{{ isyeri.isyeri_aciklama }}
+      </td>
+    </tr>
+<tr>
+      <th scope="row">Firma Semti</th>
+      <td>{{ isyeri.semt_id.semt_adi }}
+      </td>
+    </tr>
+{% if not isyeri.isyeri_foto_01=="" %}
+    <tr>
+      <th scope="row">Firma Fotoğraf - 1</th>
+        <td><img src="/{{ isyeri.isyeri_foto_01 }}" width="150" height="150">
+      </td>
+    </tr>
+{% endif %}
+{% if not isyeri.isyeri_foto_02=="" %}
+    <tr>
+      <th scope="row">Firma Fotoğraf - 2</th>
+        <td><img src="/{{ isyeri.isyeri_foto_02 }}" width="150" height="150">
+      </td>
+    </tr>
+{% endif %}
+{% if not isyeri.isyeri_foto_03=="" %}
+    <tr>
+      <th scope="row">Firma Fotoğraf - 3</th>
+        <td><img src="/{{ isyeri.isyeri_foto_03 }}" width="150" height="150">
+      </td>
+    </tr>
+{% endif %}
+
+{% if not isyeri.isyeri_foto_04=="" %}
+    <tr>
+      <th scope="row">Firma Fotoğraf - 4</th>
+        <td><img src="/{{ isyeri.isyeri_foto_04 }}" width="150" height="150">
+      </td>
+    </tr>
+{% endif %}
+{% if not isyeri.isyeri_foto_05=="" %}
+    <tr>
+      <th scope="row">Firma Fotoğraf - 5</th>
+        <td><img src="/{{ isyeri.isyeri_foto_05 }}" width="150" height="150">
+      </td>
+    </tr>
+{% endif %}
+<tr>
+      <th scope="row">Firma Görüntülenme Sayısı</th>
+      <td>{{ isyeri.isyeri_goruntulenme_sayisi }}
+      </td>
+    </tr>
+{#<tr>#}
+{#      <th scope="row">Firma Puanı</th>#}
+{#      <td>{{ isyeri.isyeri_puani }}#}
+{#      </td>#}
+{#    </tr>#}
+{#<tr>#}
+{#      <th scope="row">Firma Oyla</th>#}
+{#      <td>{{ isyeri.isyeri_oylama }}#}
+{#      </td>#}
+{#    </tr>#}
+
+
+
+                </table>
+<br>
+<br>
+                <table class="table">
+  <thead class="thead-success ">
+    <tr>
+      <th scope="col">Firmaya Yorum Yapan</th>
+      <th scope="col">Yorumun İçeriği</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for yorum in yorumlar %}
+    <tr>
+      <th scope="row">{{yorum.yorum_yapan_adi}}</th>
+      <td>{{yorum.yorum_aciklama}}</td>
+    </tr>
+    {% endfor %}
+
+
+                </table>
+<br>
+{% endif %}
+</div>
+
+    {% endblock %}
+
+

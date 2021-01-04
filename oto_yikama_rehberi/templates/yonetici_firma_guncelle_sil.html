@@ -1,0 +1,55 @@
+{% extends "yonetici.html" %}
+
+{% block sayfa_baslik %}
+Yönetici Sayfası - Firma Güncelleme ve Silme Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+  Firma Güncelleme ve Silme Sayfasındasınız {{ yonetici.yonetici_adi_soyadi.upper() }}<br>
+    Aşağıda Sisteminize Kayıtlı Bulunan Firmaların Listesini Bulabilirsiniz
+{% endblock %}
+
+
+
+
+
+
+
+    {% block icerik %}
+            <div class="container">
+    <div class="alert alert-success" role="alert">
+    Kayıtlı Toplam Firma Sayısı : {{ isyerleri.__len__() }} <br>
+    </div>
+        <table class="table table-sm table-primary">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Firma İd</th>
+      <th scope="col">Firma Adı</th>
+       <th scope="col">Firma Resmi</th>
+        <th scope="col">Firma Semti</th>
+        <th scope="col">Görüntülenme Sayısı</th>
+      <th scope="col">Firma Güncelle</th>
+        <th scope="col">Firma Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for isyeri in isyerleri %}
+      <tr>
+      <th scope="row">{{ isyeri.isyeri_id }}</th>
+      <td>{{ isyeri.isyeri_adi }}</td>
+      <td><img src="/{{ isyeri.isyeri_foto_01 }}" width="150" height="150"></td>
+      <td>{{ isyeri.semt_id.semt_adi}}</td>
+      <td>{{ isyeri.isyeri_goruntulenme_sayisi }}</td>
+      <td><a href= "/yonetici_firma_guncelle/{{ isyeri.isyeri_id}}" >Firma Güncelle</a></td>
+      <td><a href= "/yonetici_firma_guncelle_sil/{{ isyeri.isyeri_id}}" >Firma Sil</a></td>
+    </tr>
+  {% endfor %}
+
+     </tbody>
+</table>
+
+
+</div>
+    {% endblock %}
+
+

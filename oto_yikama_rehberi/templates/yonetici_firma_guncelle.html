@@ -1,0 +1,99 @@
+{% extends "yonetici.html" %}
+
+{% block sayfa_baslik %}
+    Yönetici Sayfası - Firma Güncelleme Sayfası
+{% endblock %}
+
+{% block icerik_baslik %}
+    Firma Güncelleme Sayfasındasınız Sayın : {{ yonetici.yonetici_adi_soyadi.upper() }}<br>
+    Aşağıdaki Formu Doldurarak Firma Güncelleme Yapabilirsiniz
+{% endblock %}
+
+{% block icerik %}
+    <div class="container">
+        {% if mesaj %}
+            <div class="alert alert-success" role="alert">
+                Firma Güncelleme İşleminiz {{ mesaj }} İle Sonuçlanmıştır<br>
+                Yukarıda Bulunan Menü Aracılığı ile Yapmak İstediğiniz İşlemi Seçebilirsiniz
+            </div>
+        {% else %}
+            <form action="/yonetici_firma_guncelle" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label>Firma Adı</label>
+                      <input type="text" class="form-control" id="inputEmail4" value="{{ isyeri.isyeri_adi }}"  name="isyeri_adi">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Firma Adresi</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{ isyeri.isyeri_adresi }}" name="isyeri_adresi">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Firma Telefon</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{ isyeri.isyeri_telefon }}" name="isyeri_telefon">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                         <label for="inputState">Firma Semti</label>
+                              <select id="inputState" class="form-control" name="isyeri_semt_id">
+                                  {% for semt in semtler %}
+                                    <option value={{ semt.semt_id }}>{{ semt.semt_adi}}</option>
+                                  {% endfor %}
+                              </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label >Firma Websitesi</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{ isyeri.isyeri_websitesi }}" name="isyeri_websitesi">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Firma Açıklama</label>
+                      <input type="textarea" class="form-control" id="inputPassword4" value="{{ isyeri.isyeri_aciklama }}" name="isyeri_aciklama">
+                    </div>
+
+                <div class="form-group col-md-2">
+                         <label for="inputState">Firma Durum</label>
+                              <select id="inputState" class="form-control" name="isyeri_durum">
+                                  <option value=0>Yayında</option>
+                                    <option value=1>Askıda</option>
+                                        <option value=2>Onay Bekliyor</option>
+                              </select>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle</label>
+                          <img src="/{{ isyeri.isyeri_foto_01 }}" width="150" height="150"><br>
+                                <input type="file"  class="form-control" name="dosya01" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -2</label>
+                          <img src="/{{ isyeri.isyeri_foto_02 }}" width="150" height="150"><br>
+                                <input type="file"  class="form-control" name="dosya02" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -3</label>
+                          <img src="/{{ isyeri.isyeri_foto_03 }}" width="150" height="150"><br>
+                                <input type="file"  class="form-control" name="dosya03" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+
+                                <label for="inputState">Firma Resmi Ekle -4</label>
+                          <img src="/{{ isyeri.isyeri_foto_04 }}" width="150" height="150"><br>
+                                <input type="file"  class="form-control" name="dosya04" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                                <label for="inputState">Firma Resmi Ekle -5</label>
+                          <img src="/{{ isyeri.isyeri_foto_05 }}" width="150" height="150"><br>
+                                <input type="file"  class="form-control" name="dosya05" placeholder="Resim Seçiniz">
+                      </div>
+                      <div class="form-group col-md-2" >
+                            <label for="inputState">Firma Güncelle</label><br>
+                          <input type="hidden" name="isyeri_id" value="{{ isyeri.isyeri_id }}">
+                                <button type="submit" class="btn btn-primary" >Firma Güncelle</button>
+                      </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
